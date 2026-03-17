@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -9,13 +8,12 @@ using UnityEngine;
 public static class ScenarioLoader
 {
     /// <summary>
-    /// 指定した客名のCSVを読み込んでScenarioDataを返します。
-    /// CSVはAssets/StreamingAssets/Scenarios/に配置してください。
+    /// CSVを読み込んでScenarioDataを返します。
+    /// CSVはAssets/StreamingAssets/Scenarios/scenario.csvに配置してください。
     /// </summary>
-    /// <param name="characterName">客の名前（CSVのファイル名）</param>
-    public static ScenarioData Load(string characterName)
+    public static ScenarioData Load()
     {
-        var path = Path.Combine(Application.streamingAssetsPath, "Scenarios", $"{characterName}.csv");
+        var path = Path.Combine(Application.streamingAssetsPath, "Scenarios", "scenario.csv");
 
         if (!File.Exists(path))
         {
@@ -23,7 +21,7 @@ public static class ScenarioLoader
             return null;
         }
 
-        var data = new ScenarioData { characterName = characterName };
+        var data = new ScenarioData();
         var lines = File.ReadAllLines(path);
 
         // 1行目はヘッダーなのでスキップ
@@ -45,7 +43,7 @@ public static class ScenarioLoader
         if (string.IsNullOrWhiteSpace(csvLine)) return null;
 
         var cols = csvLine.Split(',');
-        if (cols.Length < 13) return null;
+        if (cols.Length < 18) return null;
 
         return new ScenarioLine
         {
@@ -62,6 +60,12 @@ public static class ScenarioLoader
             bgm = cols[10].Trim(),
             se = cols[11].Trim(),
             cocktail = cols[12].Trim(),
+            nextCharacter = cols[13].Trim(),
+            cocktailShortNext = int.TryParse(cols[14], out var csn) ? csn : 0,
+            cocktailJustNext = int.TryParse(cols[15], out var cjn) ? cjn : 0,
+            cocktailLongNext = int.TryParse(cols[16], out var cln) ? cln : 0,
+            cocktailMinTime = float.TryParse(cols[17], out var cmin) ? cmin : 2.5f,
+            cocktailMaxTime = float.TryParse(cols[18], out var cmax) ? cmax : 3.5f,
         };
     }
 }

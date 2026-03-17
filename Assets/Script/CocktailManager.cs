@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// カクテルの提供演出を管理するクラス。
+/// カクテルの提供演出とシェイカーミニゲームを管理するクラス。
 /// </summary>
 public class CocktailManager : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class CocktailManager : MonoBehaviour
     // インスペクター設定
     // -------------------------------------------------------
 
-    [Header("カクテル表示パネル")]
+    [Header("カクテル完成パネル")]
     [SerializeField] private GameObject cocktailPanel;
 
     [Header("カクテル名テキスト")]
@@ -29,6 +29,15 @@ public class CocktailManager : MonoBehaviour
 
     [Header("閉じるボタン")]
     [SerializeField] private Button closeButton;
+
+    // -------------------------------------------------------
+    // 内部状態
+    // -------------------------------------------------------
+
+    /// <summary>シェイク結果に応じた次のIDを保持</summary>
+    private int shortNextId;
+    private int justNextId;
+    private int longNextId;
 
     // -------------------------------------------------------
     // ライフサイクル
@@ -44,7 +53,7 @@ public class CocktailManager : MonoBehaviour
         Instance = this;
 
         cocktailPanel.SetActive(false);
-        closeButton.onClick.AddListener(() => cocktailPanel.SetActive(false));
+        closeButton.onClick.AddListener(OnCloseButtonClicked);
     }
 
     // -------------------------------------------------------
@@ -52,21 +61,43 @@ public class CocktailManager : MonoBehaviour
     // -------------------------------------------------------
 
     /// <summary>
-    /// カクテルを提供する演出を表示します。
-    /// 画像はResources/Cocktails/に配置してください。
+    /// シェイカーミニゲームを開始します。
+    /// NovelManagerから呼ばれます。
     /// </summary>
-    /// <param name="cocktailName">カクテル名</param>
-    public void ServeCocktail(string cocktailName)
+    public void ServeCocktail(string cocktailName, float minTime, float maxTime, int shortNext, int justNext, int longNext)
     {
-        cocktailNameText.text = cocktailName;
+        shortNextId = shortNext;
+        justNextId = justNext;
+        longNextId = longNext;
 
-        var sprite = Resources.Load<Sprite>($"Cocktails/{cocktailName}");
-        if (sprite != null)
-            cocktailImage.sprite = sprite;
-        else
-            Debug.LogWarning($"[CocktailManager] カクテル画像が見つかりません: Cocktails/{cocktailName}");
+        ShakerMinigame.Instance?.StartShaker(minTime, maxTime, OnShakeComplete);
+    }
 
+    /// <summary>
+    /// シェイク完了時に呼ばれます。結果に応じてカクテル完成パネルを表示します。
+    /// </summary>
+    private void OnShakeComplete(ShakerMinigame.ShakeResult result)
+    {
+        // 結果に応じた次のIDを選択
+        int nextId = result switch
+        {
+            ShakerMinigame.ShakeResult.Short => shortNextId,
+            ShakerMinigame.ShakeResult.Just => justNextId,
+            ShakerMinigame.ShakeResult.Long => longNextId,
+            _ => justNextId
+        };
+
+        // カクテル完成パネルを表示してからシナリオを進める
         cocktailPanel.SetActive(true);
+        NovelManager.Instance?.GoToLine(nextId);
+    }
+
+    /// <summary>
+    /// 閉じるボタンが押されたときにパネルを非表示にします。
+    /// </summary>
+    private void OnCloseButtonClicked()
+    {
+        cocktailPanel.SetActive(false);
     }
 }
 //

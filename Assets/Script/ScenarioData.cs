@@ -7,7 +7,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class ScenarioLine
 {
-    /// <summary>行を識別するID（次の行の指定に使用）</summary>
+    /// <summary>行を識別するID</summary>
     public int id;
 
     /// <summary>話しているキャラクター名</summary>
@@ -46,22 +46,43 @@ public class ScenarioLine
     /// <summary>提供するカクテル名（なければ空）</summary>
     public string cocktail;
 
+    /// <summary>次に切り替わるキャラクター名（なければ空）</summary>
+    public string nextCharacter;
+
     /// <summary>選択肢があるかどうか</summary>
     public bool HasChoice => !string.IsNullOrEmpty(choice1Text);
 
     /// <summary>カクテル提供コマンドがあるかどうか</summary>
     public bool HasCocktail => !string.IsNullOrEmpty(cocktail);
+    /// <summary>カクテル分岐があるかどうか</summary>
+    public bool HasCocktailBranch => cocktailShortNext > 0;
+
+
+    /// <summary>次のキャラクターへの切り替えがあるかどうか</summary>
+    public bool HasNextCharacter => !string.IsNullOrEmpty(nextCharacter);
+
+    /// <summary>振りが少ないときに飛ぶID</summary>
+    public int cocktailShortNext;
+
+    /// <summary>振りがちょうどのときに飛ぶID</summary>
+    public int cocktailJustNext;
+
+    /// <summary>振りが多いときに飛ぶID</summary>
+    public int cocktailLongNext;
+
+    /// <summary>ちょうどの最小シェイク時間（秒）</summary>
+    public float cocktailMinTime;
+
+    /// <summary>ちょうどの最大シェイク時間（秒）</summary>
+    public float cocktailMaxTime;
 }
 
 /// <summary>
-/// 1人の客のシナリオ全体を保持するクラス。
+/// シナリオ全体を保持するクラス。
 /// </summary>
 [System.Serializable]
 public class ScenarioData
 {
-    /// <summary>客の名前</summary>
-    public string characterName;
-
     /// <summary>IDをキーにしたシナリオ行の辞書</summary>
     public Dictionary<int, ScenarioLine> lines = new();
 }
