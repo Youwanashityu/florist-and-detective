@@ -52,7 +52,10 @@ MonoBehaviour:
   seList:
   - name: Regulation
     clip: {fileID: 8300000, guid: 26d182f816bc93a439ecc182a7356a5c, type: 3}
-    volume: 0
+    volume: 1
+  - name: Bell
+    clip: {fileID: 8300000, guid: f3c68df31482fe24bb093a69c0523bc5, type: 3}
+    volume: 1
 --- !u!82 &4859493318951858545
 AudioSource:
   m_ObjectHideFlags: 0

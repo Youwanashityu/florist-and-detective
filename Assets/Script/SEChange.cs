@@ -29,6 +29,7 @@ public class SEChange : MonoBehaviour
             return;
         }
 
+        Debug.Log($"[SEChange] PlaySEŒÄ‚Ño‚µ: {seName}");
         SoundManager.Instance.PlaySE(seName);
     }
 }

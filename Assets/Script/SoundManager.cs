@@ -148,6 +148,8 @@ public class SoundManager : MonoBehaviour
 
         seSource.clip = data.clip;
         seSource.volume = data.volume;
+        Debug.Log($"[SoundManager] Play直前 volume:{seSource.volume} clip:{seSource.clip?.name} output:{seSource.outputAudioMixerGroup}");
         seSource.Play();
+        Debug.Log($"[SoundManager] Play直後 isPlaying:{seSource.isPlaying}");
     }
 }
