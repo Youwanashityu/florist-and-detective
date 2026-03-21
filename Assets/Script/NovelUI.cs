@@ -84,9 +84,14 @@ public class NovelUI : MonoBehaviour
         {
             var sprite = Resources.Load<Sprite>($"Sprites/{line.character}/{line.sprite}");
             if (sprite != null)
+            {
                 characterImage.sprite = sprite;
-            else
-                Debug.LogWarning($"[NovelUI] スプライトが見つかりません: Sprites/{line.character}/{line.sprite}");
+                characterImage.gameObject.SetActive(true); // 表示
+            }
+        }
+        else
+        {
+            characterImage.gameObject.SetActive(false); // 非表示
         }
 
         // 好感度更新

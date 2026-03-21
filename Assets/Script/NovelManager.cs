@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// シナリオの進行・好感度・キャラクター切り替えを管理するクラス。
@@ -90,6 +91,13 @@ public class NovelManager : MonoBehaviour
                 affinityDict[currentCharacter] = 0;
         }
 
+        // 好感度自動分岐チェック
+        if (currentLine.HasAffinityBranch && GetCurrentAffinity() >= currentLine.affinityThreshold)
+        {
+            GoToLine(currentLine.affinityNext);
+            return;
+        }
+
         // BGM切り替え
         if (!string.IsNullOrEmpty(currentLine.bgm))
             PlayBGM(currentLine.bgm);
@@ -112,7 +120,16 @@ public class NovelManager : MonoBehaviour
         }
         // UIに表示を依頼
         NovelUI.Instance?.ShowLine(currentLine, GetCurrentAffinity());
+
+        // シーン遷移チェック（UIに表示した後に追加）
+        if (currentLine.HasNextScene)
+        {
+            SceneManager.LoadScene(currentLine.nextScene);
+            return;
+        }
     }
+
+
 
     /// <summary>
     /// 次の行に進みます。
@@ -122,11 +139,12 @@ public class NovelManager : MonoBehaviour
         if (currentLine == null) return;
         if (currentLine.HasChoice) return;
 
-        // 次のキャラクターへの切り替えがある場合
         if (currentLine.HasNextCharacter)
             currentCharacter = currentLine.nextCharacter;
 
-        GoToLine(currentLine.id + 1);
+        // next_idが指定されていればそこへ、なければid+1へ
+        int nextId = currentLine.nextId > 0 ? currentLine.nextId : currentLine.id + 1;
+        GoToLine(nextId);
     }
 
     /// <summary>

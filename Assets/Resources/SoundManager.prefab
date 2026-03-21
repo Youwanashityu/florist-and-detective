@@ -56,6 +56,15 @@ MonoBehaviour:
   - name: Bell
     clip: {fileID: 8300000, guid: f3c68df31482fe24bb093a69c0523bc5, type: 3}
     volume: 1
+  - name: Glass
+    clip: {fileID: 8300000, guid: 10ea6189b1ba5ea4fa7cffd844b95192, type: 3}
+    volume: 1
+  - name: Alert
+    clip: {fileID: 8300000, guid: 9792669a28f08764fac1d9c3149abf23, type: 3}
+    volume: 1
+  - name: Alert
+    clip: {fileID: 8300000, guid: 9792669a28f08764fac1d9c3149abf23, type: 3}
+    volume: 1
 --- !u!82 &4859493318951858545
 AudioSource:
   m_ObjectHideFlags: 0

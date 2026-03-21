@@ -18,6 +18,10 @@ public class ScenarioLine
 
     /// <summary>表示するテキスト</summary>
     public string text;
+    /// <summary>次に進むID（0なら id+1 に自動で進む）</summary>
+    public int nextId;
+
+
 
     /// <summary>選択肢1のテキスト（なければ空）</summary>
     public string choice1Text;
@@ -75,6 +79,21 @@ public class ScenarioLine
 
     /// <summary>ちょうどの最大シェイク時間（秒）</summary>
     public float cocktailMaxTime;
+    /// <summary>好感度分岐の閾値（0なら分岐なし）</summary>
+    public int affinityThreshold;
+
+    /// <summary>好感度が閾値以上のときに飛ぶID</summary>
+    public int affinityNext;
+
+    /// <summary>好感度分岐があるかどうか</summary>
+    public bool HasAffinityBranch => affinityThreshold > 0 && affinityNext > 0;
+
+    /// <summary>遷移するシーン名（空なら遷移しない）</summary>
+    public string nextScene;
+
+    /// <summary>シーン遷移があるかどうか</summary>
+    public bool HasNextScene => !string.IsNullOrEmpty(nextScene);
+
 }
 
 /// <summary>
