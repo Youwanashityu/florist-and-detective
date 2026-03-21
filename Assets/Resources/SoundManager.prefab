@@ -62,8 +62,14 @@ MonoBehaviour:
   - name: Alert
     clip: {fileID: 8300000, guid: 9792669a28f08764fac1d9c3149abf23, type: 3}
     volume: 1
-  - name: Alert
-    clip: {fileID: 8300000, guid: 9792669a28f08764fac1d9c3149abf23, type: 3}
+  - name: Call
+    clip: {fileID: 8300000, guid: 718366c8cc14f4c4d874ac67350d9156, type: 3}
+    volume: 1
+  - name: Rustle
+    clip: {fileID: 8300000, guid: 4de22826a42cc7943b303e3ed95d2b29, type: 3}
+    volume: 1
+  - name: Fall
+    clip: {fileID: 8300000, guid: 0ac2b2c84f9fc58438904f8c708ed39d, type: 3}
     volume: 1
 --- !u!82 &4859493318951858545
 AudioSource:

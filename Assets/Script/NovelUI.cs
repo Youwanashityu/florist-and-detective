@@ -66,8 +66,11 @@ public class NovelUI : MonoBehaviour
             return;
         }
         Instance = this;
-    }
 
+        // 初期テキストをクリア
+        characterNameText.text = "";
+        dialogueText.text = "";
+    }
     private void Start()
     {
         nextButton.onClick.AddListener(OnNextButtonClicked);
@@ -91,16 +94,17 @@ public class NovelUI : MonoBehaviour
         // キャラクター画像切り替え
         if (!string.IsNullOrEmpty(line.sprite))
         {
+            Debug.Log($"[NovelUI] スプライト読み込み: Sprites/{line.character}/{line.sprite}");
             var sprite = Resources.Load<Sprite>($"Sprites/{line.character}/{line.sprite}");
             if (sprite != null)
             {
                 characterImage.sprite = sprite;
                 characterImage.gameObject.SetActive(true);
             }
-        }
-        else
-        {
-            characterImage.gameObject.SetActive(false);
+            else
+            {
+                Debug.LogWarning($"[NovelUI] スプライトが見つかりません: Sprites/{line.character}/{line.sprite}");
+            }
         }
 
         // 好感度更新
@@ -168,16 +172,16 @@ public class NovelUI : MonoBehaviour
     /// </summary>
     private void OnNextButtonClicked()
     {
+        Debug.Log($"[NovelUI] NextButton押された isTyping:{isTyping}");
+
         if (isTyping)
         {
-            // タイプライター中なら全文を一気に表示
             StopAllCoroutines();
             isTyping = false;
             dialogueText.text = fullText;
             nextButton.gameObject.SetActive(true);
             return;
         }
-
         NovelManager.Instance.NextLine();
     }
 }

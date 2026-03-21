@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 /// <summary>
 /// デバッグ用のスクリプト。
@@ -20,11 +22,17 @@ public class NovelDebugger : MonoBehaviour
     // ライフサイクル
     // -------------------------------------------------------
 
-    private void Start()
+    private IEnumerator Start()
     {
-        if (!enableDebug) return;
+        if (!enableDebug) yield break;
 
-        // NovelManagerの通常のStart処理を上書きして指定IDから開始
+        NovelManager.Instance.skipAutoStart = true;
+
+        // NovelManagerとNovelUIの初期化を待つ
+        yield return null;
+        yield return null;
+
+        Debug.Log($"[NovelDebugger] ID:{debugStartId} からジャンプ");
         NovelManager.Instance?.GoToLine(debugStartId);
     }
 

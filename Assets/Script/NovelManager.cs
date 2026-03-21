@@ -51,15 +51,20 @@ public class NovelManager : MonoBehaviour
         Instance = this;
     }
 
+    /// <summary>デバッグ時に自動開始をスキップするフラグ</summary>
+    public bool skipAutoStart = false;
+
     private void Start()
     {
         scenarioData = ScenarioLoader.Load();
-
         if (scenarioData == null)
         {
             Debug.LogWarning("[NovelManager] シナリオの読み込みに失敗しました。");
             return;
         }
+
+        // デバッグ時は自動開始をスキップ
+        if (skipAutoStart) return;
 
         GoToLine(startId);
     }
