@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,11 +35,24 @@ public class NovelUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI choice2Text;
 
     [Header("好感度ゲージ")]
-    [SerializeField] private Image affinityGauge; // Fill画像
-    [SerializeField] private int maxAffinity = 10;
+    [SerializeField] private Image affinityGauge;
+    [SerializeField] private int maxAffinity = 5;
 
     [Header("次へボタン")]
     [SerializeField] private Button nextButton;
+
+    [Header("タイプライター効果")]
+    [SerializeField] private float typingSpeed = 0.05f;
+
+    // -------------------------------------------------------
+    // 内部状態
+    // -------------------------------------------------------
+
+    /// <summary>タイプライター中かどうか</summary>
+    private bool isTyping = false;
+
+    /// <summary>現在表示中の全文テキスト</summary>
+    private string fullText = "";
 
     // -------------------------------------------------------
     // ライフサイクル
@@ -56,8 +70,7 @@ public class NovelUI : MonoBehaviour
 
     private void Start()
     {
-        // ボタンのリスナー登録
-        nextButton.onClick.AddListener(NovelManager.Instance.NextLine);
+        nextButton.onClick.AddListener(OnNextButtonClicked);
         choice1Button.onClick.AddListener(() => NovelManager.Instance.SelectChoice(0));
         choice2Button.onClick.AddListener(() => NovelManager.Instance.SelectChoice(1));
 
@@ -71,13 +84,9 @@ public class NovelUI : MonoBehaviour
     /// <summary>
     /// シナリオの1行を受け取ってUIに反映します。
     /// </summary>
-    /// <param name="line">表示するシナリオ行</param>
-    /// <param name="affinity">現在の好感度</param>
     public void ShowLine(ScenarioLine line, int affinity)
     {
-        // テキスト表示
         characterNameText.text = line.character;
-        dialogueText.text = line.text;
 
         // キャラクター画像切り替え
         if (!string.IsNullOrEmpty(line.sprite))
@@ -86,39 +95,89 @@ public class NovelUI : MonoBehaviour
             if (sprite != null)
             {
                 characterImage.sprite = sprite;
-                characterImage.gameObject.SetActive(true); // 表示
+                characterImage.gameObject.SetActive(true);
             }
         }
         else
         {
-            characterImage.gameObject.SetActive(false); // 非表示
+            characterImage.gameObject.SetActive(false);
         }
 
         // 好感度更新
         UpdateAffinity(affinity);
 
-        // 選択肢の表示切り替え
-        if (line.HasChoice)
-        {
-            choicePanel.SetActive(true);
-            nextButton.gameObject.SetActive(false);
-            choice1Text.text = line.choice1Text;
-            choice2Text.text = line.choice2Text;
-        }
-        else
-        {
-            choicePanel.SetActive(false);
-            nextButton.gameObject.SetActive(true);
-        }
+        // 選択肢の表示切り替え（タイプライター終了後に表示）
+        choicePanel.SetActive(false);
+        nextButton.gameObject.SetActive(false);
+
+        // タイプライター開始
+        StopAllCoroutines();
+        fullText = line.text;
+        StartCoroutine(TypeText(line));
     }
 
     /// <summary>
     /// 好感度ゲージを更新します。
     /// </summary>
-    /// <param name="affinity">現在の好感度（0〜10）</param>
     public void UpdateAffinity(int affinity)
     {
         float fill = Mathf.Clamp01((float)affinity / maxAffinity);
         affinityGauge.fillAmount = fill;
+    }
+
+    // -------------------------------------------------------
+    // タイプライター
+    // -------------------------------------------------------
+
+    /// <summary>
+    /// テキストを1文字ずつ表示するコルーチン。
+    /// </summary>
+    private IEnumerator TypeText(ScenarioLine line)
+    {
+        isTyping = true;
+        dialogueText.text = "";
+
+        foreach (var c in fullText)
+        {
+            dialogueText.text += c;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        isTyping = false;
+
+        // タイプライター終了後に選択肢or次へボタンを表示
+        if (line.HasChoice)
+        {
+            choicePanel.SetActive(true);
+            choice1Text.text = line.choice1Text;
+            choice2Text.text = line.choice2Text;
+        }
+        else
+        {
+            nextButton.gameObject.SetActive(true);
+        }
+    }
+
+    // -------------------------------------------------------
+    // ボタン処理
+    // -------------------------------------------------------
+
+    /// <summary>
+    /// 次へボタンが押されたときの処理。
+    /// タイプライター中なら全文表示、終わっていれば次の行へ。
+    /// </summary>
+    private void OnNextButtonClicked()
+    {
+        if (isTyping)
+        {
+            // タイプライター中なら全文を一気に表示
+            StopAllCoroutines();
+            isTyping = false;
+            dialogueText.text = fullText;
+            nextButton.gameObject.SetActive(true);
+            return;
+        }
+
+        NovelManager.Instance.NextLine();
     }
 }
