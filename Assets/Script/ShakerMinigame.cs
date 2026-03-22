@@ -112,10 +112,9 @@ public class ShakerMinigame : MonoBehaviour
                 shakerImage.localPosition = originalPosition;
         }
 
-        // ゲージ・テキスト更新（最大時間の2倍を上限とする）
-        float maxDisplay = maxTime * 2f;
+        // ゲージ・テキスト更新
         if (timerGauge != null)
-            timerGauge.fillAmount = Mathf.Clamp01(elapsedTime / maxDisplay);
+            timerGauge.fillAmount = Mathf.Clamp01(elapsedTime / maxTime);
         if (timerText != null)
             timerText.text = $"{elapsedTime:F1}s";
     }

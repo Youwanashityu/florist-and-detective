@@ -36,8 +36,6 @@ public class TitleSceneManager : MonoBehaviour
         retryButton.onClick.AddListener(RetryFromLastChoice);
         checkpointButton.onClick.AddListener(StartFromCheckpoint);
 
-        // 直前の選択肢がなければリトライボタンを非表示
-        retryButton.gameObject.SetActive(NovelProgressData.LastChoiceId > 0);
     }
 
     // -------------------------------------------------------
