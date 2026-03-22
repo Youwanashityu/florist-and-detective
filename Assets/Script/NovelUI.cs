@@ -149,6 +149,20 @@ public class NovelUI : MonoBehaviour
 
         isTyping = false;
 
+        // カクテル提供がある場合はタイプライター終了後に開始
+        if (line.HasCocktail)
+        {
+            CocktailManager.Instance?.ServeCocktail(
+                line.cocktail,
+                line.cocktailMinTime,
+                line.cocktailMaxTime,
+                line.cocktailShortNext,
+                line.cocktailJustNext,
+                line.cocktailLongNext
+            );
+            yield break;
+        }
+
         // タイプライター終了後に選択肢or次へボタンを表示
         if (line.HasChoice)
         {

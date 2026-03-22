@@ -1,6 +1,5 @@
-using UnityEngine;
 using System.Collections;
-
+using UnityEngine;
 
 /// <summary>
 /// デバッグ用のスクリプト。
@@ -18,6 +17,9 @@ public class NovelDebugger : MonoBehaviour
     [Header("デバッグモードを有効にするか")]
     [SerializeField] private bool enableDebug = true;
 
+    [Header("再生するBGM名（空欄なら再生しない）")]
+    [SerializeField] private string debugBGMName = "";
+
     // -------------------------------------------------------
     // ライフサイクル
     // -------------------------------------------------------
@@ -28,18 +30,24 @@ public class NovelDebugger : MonoBehaviour
 
         NovelManager.Instance.skipAutoStart = true;
 
-        // NovelManagerとNovelUIの初期化を待つ
         yield return null;
         yield return null;
+
+        // BGM再生
+        if (!string.IsNullOrEmpty(debugBGMName))
+        {
+            var clip = Resources.Load<AudioClip>($"BGM/{debugBGMName}");
+            if (clip != null)
+                SoundManager.Instance?.PlayBGM(clip);
+            else
+                Debug.LogWarning($"[NovelDebugger] BGM '{debugBGMName}' が見つかりません。");
+        }
 
         Debug.Log($"[NovelDebugger] ID:{debugStartId} からジャンプ");
         NovelManager.Instance?.GoToLine(debugStartId);
     }
 
 #if UNITY_EDITOR
-    /// <summary>
-    /// エディター上でGキーを押したら指定IDにジャンプします。
-    /// </summary>
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))

@@ -21,8 +21,8 @@ public class CocktailManager : MonoBehaviour
     [Header("カクテル完成パネル")]
     [SerializeField] private GameObject cocktailPanel;
 
-    [Header("カクテル名テキスト")]
-    [SerializeField] private TextMeshProUGUI cocktailNameText;
+    //[Header("カクテル名テキスト")]
+    //[SerializeField] private TextMeshProUGUI cocktailNameText;
 
     [Header("カクテル画像")]
     [SerializeField] private Image cocktailImage;

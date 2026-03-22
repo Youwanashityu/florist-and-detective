@@ -57,14 +57,18 @@ public class NovelManager : MonoBehaviour
     private void Start()
     {
         scenarioData = ScenarioLoader.Load();
-        if (scenarioData == null)
+        if (scenarioData == null) return;
+
+        if (skipAutoStart) return;
+
+        // JumpToIdが指定されていればそこから開始
+        if (NovelProgressData.JumpToId > 0)
         {
-            Debug.LogWarning("[NovelManager] シナリオの読み込みに失敗しました。");
+            int jumpId = NovelProgressData.JumpToId;
+            NovelProgressData.JumpToId = 0; // リセット
+            GoToLine(jumpId);
             return;
         }
-
-        // デバッグ時は自動開始をスキップ
-        if (skipAutoStart) return;
 
         GoToLine(startId);
     }
@@ -110,19 +114,12 @@ public class NovelManager : MonoBehaviour
         // SE再生
         if (!string.IsNullOrEmpty(currentLine.se))
             SoundManager.Instance?.PlaySE(currentLine.se);
-        // カクテル提供（GoToLine内のこの部分を変更）
-        if (currentLine.HasCocktail)
-        {
-            CocktailManager.Instance?.ServeCocktail(
-                currentLine.cocktail,
-                currentLine.cocktailMinTime,
-                currentLine.cocktailMaxTime,
-                currentLine.cocktailShortNext,
-                currentLine.cocktailJustNext,
-                currentLine.cocktailLongNext
-            );
-            return;
-        }
+
+        // 選択肢IDを記録
+        if (currentLine.HasChoice)
+            NovelProgressData.LastChoiceId = currentLine.id;
+
+
         // UIに表示を依頼
         NovelUI.Instance?.ShowLine(currentLine, GetCurrentAffinity());
 
