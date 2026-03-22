@@ -33,7 +33,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 15,Nabari,Nabari_6,"酒の作り方は専門外だぞ...
 まあなんだ、
 混ぜて振ればいいんじゃないか。
-試しに3秒くらい混ぜたらどうだ？",,,,,,,,,,screwdriver,,16,18,17,3,4,,,
+試しに3秒くらい混ぜたらどうだ？",,,,,,,,,,Screwdriver,,16,18,17,3,4,,,
 16,Nabari,Nabari_6,"やる気がなさすぎるだろ。
 君さあ、
 お茶もそんな感じで振ってるのか？",19,,,,,,,,Glass,,,,,,,,,,
@@ -78,7 +78,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 間違えても客を怒らすんじゃないぞ。",,,,,,,,,,,,,,,,,,,
 35,Nabari,Nabari_4,"客を裏切るだなんてそんなこと、
 君はしないだろう？",,,,,,,,,,,,,,,,,,,
-36,Nabari,Nabari_3,では失礼する。,,,,,,,,,Ball,,minai,,,,,,,,
+36,Nabari,Nabari_3,では失礼する。,,,,,,,,,Ball,,Minai,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
 37,Minai,Minai_4,"すんまへん、
 1人なんどすけど、よろしおすか？",,ようこそ,38,,空いてます,38,,Keep Safe,,,,,,,,,,,
@@ -126,7 +126,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 お冷って嫌がられるかと思ってました。",,,,,,,,,Glass,,,,,,,,,,
 54,Minai,Minai_8,"あ、ちゃんとお酒も頼みますよ！
 そうだな～指定してもいいですか？
-ロングアイランド・アイスティーひとつ。",,,,,,,,,,Long Island iced tea,,55,57,56,3,4,,,
+ロングアイランド・アイスティーひとつ。",,,,,,,,,,Long_Island_iced_tea,,55,57,56,3,4,,,
 55,Minai,Minai_7,"あぁ...なんか酒を混ぜた味がする...
 すみません、マドラーあります？",60,,,,,,,,Glass,,,,,,,,,,
 56,Minai,Minai_6,"思ってたよりアルコールきついですねこれ...
@@ -182,7 +182,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 82,Minai,Minai_7,はは、めんどくさ。,,,,,,,,,,,,,,,,,,,通報エンド
 83,Minai,Minai_9,ほんとかなぁ...,,,,,,,,,,,,,,,,,,,
 84,Minai,Minai_13,そろそろ帰りますね。　ごちそうさまでした。,,,,,,,,,,,,,,,,,,,
-85,,,...,,,,,,,,Baiten,Ball,,,,,,,,,,
+85,,,...,,,,,,,,Baiten,Ball,,Nabari,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,
 86,Minai,Nabari_5,"お、今日はちゃんと店番しているんだな。
 接客はうまくできたか？",,,,,,,,The Under World,Ball,,,,,,,,,,
@@ -240,7 +240,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 酔いたい気分じゃないんだ。
 度数が低いものを頼む。",,レッド・アイ,119,1,カルーア・ミルク,123,1,,,,,,,,,,,,
 119,Nabari,Nabari_7,"ビールとトマトジュース...？
-不思議な組み合わせだな。よろしく頼む",,,,,,,,,,Red Eye,,120,122,121,0.1,1,,,
+不思議な組み合わせだな。よろしく頼む",,,,,,,,,,Red_eye,,120,122,121,0.1,1,,,
 120,Nabari,Nabari_6,"... ...
 シンプルにやる気ないだろ。",128,,,,,,,,,,,,,,,,,,
 121,Nabari,Nabari_6,"マスター。
@@ -250,7 +250,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 生卵を入れたりもする？
 ふぅん...ハードボイルドだな。",128,,,,,,,,,,,,,,,,,,
 123,Nabari,Nabari_6,"カルーアミルクか...
-度数高くないか？ミルク多めで頼む。",,,,,,,,,,Kahlua and Milk,,124,127,126,0.1,1,,,
+度数高くないか？ミルク多めで頼む。",,,,,,,,,,Kahlua_and_milk,,124,127,126,0.1,1,,,
 124,Nabari,Nabari_8,"... まぁ、
 まぁまぁまぁ...
 一旦ね、一旦。ちょっと飲んでみようかなって。",128,,,,,,,,,,,,,,,,,,
@@ -287,7 +287,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 141,,,"この世界で生きるコツは
 不穏分子は排除すること。",,,,,,,,,,,,,,,,,,,
 142,,,御薬袋を通報した。,,,,,,,,,Call,,,,,,,,,,
-143,,,... ...,,,,,,,,,,,,,,,,,,,
+143,,,... ...,,,,,,,,,,,Nabari,,,,,,,,
 144,Nabari,Nabari_1,やあ、マスター。,,,,,,,,The Under World,,,,,,,,,,,
 145,Nabari,Nabari_2,良い選択をしたね。,,,,,,,,,Ball,,,,,,,,,,
 146,Nabari,Nabari_2,"危害を加える様子がなかったから
@@ -313,7 +313,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 一回ぶち込まれると手続きがめんどいんだ。",,,,,,,,,,,,,,,,,,,
 155,Nabari,Nabari_4,俺は善良な市民だってのに酷いもんだ。,,注文は？,156,1,何か飲むか？,156,1,,,,,,,,,,,,
 156,Nabari,Nabari_3,"今は...いや今か...
-カルーアミルクを作ってくれないか。",,,,,,,,,,Kahlua and Milk,,157,159,158,0.1,1,,,
+カルーアミルクを作ってくれないか。",,,,,,,,,,Kahlua_and_milk,,157,159,158,0.1,1,,,
 157,Nabari,Nabari_5,ミルクの味しかしないな...,160,,,,,,,,,,,,,,,,,,
 158,Nabari,Nabari_5,酒の入ったカフェラテどうも。,160,,,,,,,,,,,,,,,,,,
 159,Nabari,Nabari_6,"度数の高さに反したこの甘さ...
@@ -417,7 +417,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 219,,,"今も私のことを見ているのかもしれない。
 即刻警察に報告するべきだ。",,,,,,,,,,,,,,,,,,,
 220,,,隠を通報した。,,,,,,,,,Call,,,,,,,,,,
-221,,,... ...,,,,,,,,,,,,,,,,,,,
+221,,,... ...,,,,,,,,,,,Minai,,,,,,,,
 222,Minai,Minai_14,"今日も来ちゃいましたぁ！
 一名お願いします。",,,,,,,,Keep Safe,,,,,,,,,,,
 223,Minai,Minai_7,... ...,,,,,,,,,,,,,,,,,,,
