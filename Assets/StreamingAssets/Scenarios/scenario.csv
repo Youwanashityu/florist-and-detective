@@ -159,7 +159,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 植物を運ぶのなんて普通でしょう！？",,私は,70,0,警察です,70,0,,,,,,,,,,,,
 70,Minai,Minai_7,"... ...
 へー",,,,,,,,,,,,,,,,,,,
-71,Minai,Minai_5,あなたの裏の顔はそれだったんですね。,,,,,,,,,,,,,,,,,,,通報エンド
+71,Minai,Minai_5,あなたの裏の顔はそれだったんですね。,,,,,,,,,,,,,,,,,,,Report
 72,Minai,Minai_12,"愚痴聞いてくれるんですか？
 はは、やさしー...",,,,,,,,,,,,,,,,,,,
 73,Minai,Minai_13,"僕...
@@ -179,7 +179,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 79,Minai,Minai_10,別にあなたに危害は加えませんよ,,,,,,,,,,,,,,,,,,,
 80,Minai,Minai_2,裏切るんですね。,,,,,,,,,,,,,,,,,,,
 81,Minai,Minai_1,僕が供給するのは需要があるからですよ。,,私は,82,0,優等生だ,82,0,,,,,,,,,,,,
-82,Minai,Minai_7,はは、めんどくさ。,,,,,,,,,,,,,,,,,,,通報エンド
+82,Minai,Minai_7,はは、めんどくさ。,,,,,,,,,,,,,,,,,,,Report
 83,Minai,Minai_9,ほんとかなぁ...,,,,,,,,,,,,,,,,,,,
 84,Minai,Minai_13,そろそろ帰りますね。　ごちそうさまでした。,,,,,,,,,,,,,,,,,,,
 85,,,...,,,,,,,,Baiten,Ball,,Nabari,,,,,,,,
@@ -210,7 +210,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 まあ別にいいさ。",,,,,,,,,,,,,,,,,,,
 101,Nabari,Nabari_3,"コネなんていくらでもあるしな。
 すぐ出てくるから...",,,,,,,,,,,,,,,,,,,
-102,Nabari,Nabari_2,そん時はまた遊んでくれや。,,,,,,,,,,,,,,,,,,,通報エンド
+102,Nabari,Nabari_2,そん時はまた遊んでくれや。,,,,,,,,,,,,,,,,,,,Report
 103,Nabari,Nabari_1,"君の視界が狭いだけで
 俺たちはもっと前から出会ってるんだ",,,,,,,,,,,,,,,,,,,
 104,Nabari,Nabari_4,"今まで機会がなかったから
@@ -233,7 +233,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 114,Nabari,Nabari_3,酷い裏切りだ...,,,,,,,,,,,,,,,,,,,
 115,Nabari,Nabari_4,呪ってやる...恨むからなぁ...,,,,,,,,,,,,,,,,,,,
 116,Nabari,Nabari_2,"直ぐ迎えに来るからな。
-覚悟しておけよ。",,,,,,,,,,,,,,,,,,,通報エンド
+覚悟しておけよ。",,,,,,,,,,,,,,,,,,,Report
 117,Nabari,Nabari_1,"注文？
 そうだな...",,,,,,,,,,,,,,,,,,,
 118,Nabari,Nabari_4,"とはいっても今日はそんなに
@@ -302,7 +302,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 149,Nabari,Nabari_9,"料金はそうだな...
 まあ、酒でも奢ってくれりゃあ良い。",,,,,,,,,,,,,,,,,,,
 150,Nabari,Nabari_5,人生は長い、緩くいこうや。,,,,,,,,,,,,,,,,,1,152,
-151,Nabari,Nabari_2,俺は裏切らないからな。,,,,,,,,,,,,,,,,,,,トゥルーエンド
+151,Nabari,Nabari_2,俺は裏切らないからな。,,,,,,,,,,,,,,,,,,,NabariTrue
 152,Nabari,Nabari_3,"にしても...
 マスターはてっきり
 俺を通報するものだと思っていたぞ。",,何故？,153,1,考えすぎだ,153,1,,,,,,,,,,,,
@@ -350,7 +350,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 175,Nabari,Nabari_4,嫌な気分だ。,,,,,,,,,,,,,,,,,,,
 176,Nabari,Nabari_8,"人に恨まれるような
 ふるまいはわきまえることだ。",,,,,,,,,,,,,,,,,,,
-177,Nabari,Nabari_4,じゃあな。,,,,,,,,,,,,,,,,,,,通報エンド
+177,Nabari,Nabari_4,じゃあな。,,,,,,,,,,,,,,,,,,,Report
 178,Nabari,Nabari_5,"無自覚なのか？
 はは、頭上をみるといい。",,,,,,,,,,,,,,,,,,,
 179,Nabari,Nabari_9,"バレバレだよ...君のその
@@ -387,7 +387,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 200,Nabari,Nabari_4,君はもうここから逃げられない。,,通報する,201,-1,通報する,201,-1,,,,,,,,,,,,
 201,Nabari,Nabari_1,"店からの話じゃない。
 地球の裏に行ったって離れられない。",,,,,,,,,Alert,,,,,,,,,,
-202,Nabari,Nabari_2,俺に裏切られたな、マスター。,,,,,,,,,,,,,,,,,,,隠バッドエンド
+202,Nabari,Nabari_2,俺に裏切られたな、マスター。,,,,,,,,,,,,,,,,,,,NabariBad
 203,Nabari,Nabari_7,本当か。,,,,,,,,Overcome,,,,,,,,,,,
 204,Nabari,Nabari_9,あぁ良かった...,,,,,,,,,,,,,,,,,,,
 205,Nabari,Nabari_3,"君が裏切ることはないと思っていたが...
@@ -404,7 +404,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 213,Nabari,Nabari_3,"まだ話したいことがあるのに
 この時間が終わってしまうのが惜しい...",,,,,,,,,,,,,,,,,,,
 214,Nabari,Nabari_5,続きは舞台裏で...な。,,,,,,,,,,,,,,,,,,,
-215,Nabari,Nabari_9,本当に二人きりになれるところに行こう。,,,,,,,,,,,,,,,,,,,隠グッドエンド
+215,Nabari,Nabari_9,本当に二人きりになれるところに行こう。,,,,,,,,,,,,,,,,,,,NabariHappy
 ,,,,,,,,,,,,,,,,,,,,,,
 216,,,"彼は探偵だと名乗っているが...
 果たして本当にそうだろうか？
@@ -447,7 +447,7 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 信用していないみたいやから...",,,,,,,,,,,,,,,,,,,
 238,Minai,Minai_7,"してもらえるよう、
 しばらく一緒に居よか。",,,,,,,,,,,,,,,,,,,
-239,Minai,Minai_8,お話、ちゃんとしようなぁ。,,,,,,,,,,,,,,,,,,,御薬袋バッド
+239,Minai,Minai_8,お話、ちゃんとしようなぁ。,,,,,,,,,,,,,,,,,,,MinaiBad
 240,Minai,Minai_9,"... ...
 その...なんて言ったらいいか...",,,,,,,,,,,,,,,,,,,
 241,Minai,Minai_7,"大変でしたね...
@@ -461,10 +461,10 @@ id,character,sprite,text,next_id,choice1_text,choice1_next,choice1_affinity,choi
 245,Minai,Minai_9,気分が悪いならこちらを飲んで...,,,,,,,,,,,,,,,,,,,
 246,Minai,Minai_15,ふふ...市販のよりよく効きますよ。,,,,,,,,,,,,,,,,,,,
 247,Minai,Minai_10,"夜はまだ長いですから...
-しばらくこうして一緒に居ましょう。",,,,,,,,,,,,,,,,,,,トゥルーエンド
+しばらくこうして一緒に居ましょう。",,,,,,,,,,,,,,,,,,,MinaiTrue
 248,Minai,Minai_2,...逃げちゃおうか。,,,,,,,,Overcome,,,,,,,,,,,
 249,Minai,Minai_1,"私...なんだって運びますよ。
 あなたのことも運べますから。",,,,,,,,,,,,,,,,,,,
 250,Minai,Minai_8,"どこにだって逃げられますよ。
 見つかったらまた別の場所に逃げればいい。",,,,,,,,,,,,,,,,,,,
-251,Minai,Minai_2,私があなたを高嶺の花にしてあげます。,,,,,,,,,,,,,,,,,,,御薬袋グッド
+251,Minai,Minai_2,私があなたを高嶺の花にしてあげます。,,,,,,,,,,,,,,,,,,,MinaiHappy

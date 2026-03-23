@@ -1,35 +1,30 @@
+using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
-/// <summary>
-/// StreamingAssetsフォルダのCSVファイルを読み込み、
-/// ScenarioDataに変換するクラス。
-/// セル内改行・カンマを含むCSVに対応しています。
-/// </summary>
 public static class ScenarioLoader
 {
-    /// <summary>
-    /// CSVを読み込んでScenarioDataを返します。
-    /// CSVはAssets/StreamingAssets/Scenarios/scenario.csvに配置してください。
-    /// </summary>
-    public static ScenarioData Load()
-    {
-        var path = Path.Combine(Application.streamingAssetsPath, "Scenarios", "scenario.csv");
+    public static ScenarioData LoadedData { get; private set; }
 
-        if (!File.Exists(path))
+    /// <summary>
+    /// ResourcesフォルダからCSVを読み込みます。WebGL対応。
+    /// </summary>
+    public static IEnumerator LoadAsync(System.Action<ScenarioData> onComplete)
+    {
+        // ResourcesフォルダからTextAssetとして読み込む
+        var textAsset = Resources.Load<TextAsset>("Scenarios/scenario");
+
+        if (textAsset == null)
         {
-            Debug.LogWarning($"[ScenarioLoader] CSVが見つかりません: {path}");
-            return null;
+            Debug.LogWarning("[ScenarioLoader] CSVが見つかりません: Resources/Scenarios/scenario");
+            onComplete?.Invoke(null);
+            yield break;
         }
 
         var data = new ScenarioData();
-
-        // 全テキストを一括読み込みしてダブルクォーテーション内の改行に対応
-        var fullText = File.ReadAllText(path);
+        var fullText = textAsset.text;
         var lines = SplitCSVLines(fullText);
 
-        // 1行目はヘッダーなのでスキップ
         for (int i = 1; i < lines.Count; i++)
         {
             var line = ParseLine(lines[i]);
@@ -37,12 +32,11 @@ public static class ScenarioLoader
                 data.lines[line.id] = line;
         }
 
-        return data;
+        LoadedData = data;
+        onComplete?.Invoke(data);
+        yield break;
     }
 
-    /// <summary>
-    /// ダブルクォーテーション内の改行を考慮してCSVを行分割します。
-    /// </summary>
     private static List<string> SplitCSVLines(string text)
     {
         var lines = new List<string>();
@@ -73,9 +67,6 @@ public static class ScenarioLoader
         return lines;
     }
 
-    /// <summary>
-    /// CSV1行をScenarioLineに変換します。
-    /// </summary>
     private static ScenarioLine ParseLine(string csvLine)
     {
         if (string.IsNullOrWhiteSpace(csvLine)) return null;
@@ -111,9 +102,6 @@ public static class ScenarioLoader
         };
     }
 
-    /// <summary>
-    /// ダブルクォーテーション内のカンマを考慮してCSVの列を分割します。
-    /// </summary>
     private static List<string> SplitCSVColumns(string line)
     {
         var cols = new List<string>();

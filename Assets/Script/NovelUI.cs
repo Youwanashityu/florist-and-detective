@@ -92,9 +92,8 @@ public class NovelUI : MonoBehaviour
         characterNameText.text = line.character;
 
         // キャラクター画像切り替え
-        if (!string.IsNullOrEmpty(line.sprite))
+        if (!string.IsNullOrEmpty(line.character) && !string.IsNullOrEmpty(line.sprite))
         {
-            Debug.Log($"[NovelUI] スプライト読み込み: Sprites/{line.character}/{line.sprite}");
             var sprite = Resources.Load<Sprite>($"Sprites/{line.character}/{line.sprite}");
             if (sprite != null)
             {
@@ -105,6 +104,10 @@ public class NovelUI : MonoBehaviour
             {
                 Debug.LogWarning($"[NovelUI] スプライトが見つかりません: Sprites/{line.character}/{line.sprite}");
             }
+        }
+        else if (string.IsNullOrEmpty(line.character) || string.IsNullOrEmpty(line.sprite))
+        {
+            characterImage.gameObject.SetActive(false);
         }
 
         // 好感度更新

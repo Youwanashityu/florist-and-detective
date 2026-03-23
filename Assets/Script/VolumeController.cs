@@ -24,6 +24,16 @@ public class VolumeController : MonoBehaviour
     [SerializeField] private Slider seSlider;
     [SerializeField] private Button seMuteButton;
 
+    [Header("BGMミュートボタン画像")]
+    [SerializeField] private Image bgmMuteButtonImage;
+    [SerializeField] private Sprite bgmMuteOffSprite;  // 通常時の画像
+    [SerializeField] private Sprite bgmMuteOnSprite;   // ミュート時の画像
+
+    [Header("SEミュートボタン画像")]
+    [SerializeField] private Image seMuteButtonImage;
+    [SerializeField] private Sprite seMuteOffSprite;   // 通常時の画像
+    [SerializeField] private Sprite seMuteOnSprite;    // ミュート時の画像
+
     // -------------------------------------------------------
     // 内部状態
     // -------------------------------------------------------
@@ -103,15 +113,15 @@ public class VolumeController : MonoBehaviour
         if (isBGMMuted)
         {
             ApplyBGMVolume(0f);
+            bgmMuteButtonImage.sprite = bgmMuteOnSprite;
         }
         else
         {
-            // ミュート解除時は直前の音量に戻す
             bgmSlider.value = lastBGMVolume;
             ApplyBGMVolume(lastBGMVolume);
+            bgmMuteButtonImage.sprite = bgmMuteOffSprite;
         }
     }
-
     /// <summary>
     /// SEのミュートをトグルします。
     /// </summary>
@@ -122,11 +132,13 @@ public class VolumeController : MonoBehaviour
         if (isSEMuted)
         {
             ApplySEVolume(0f);
+            seMuteButtonImage.sprite = seMuteOnSprite;
         }
         else
         {
             seSlider.value = lastSEVolume;
             ApplySEVolume(lastSEVolume);
+            seMuteButtonImage.sprite = seMuteOffSprite;
         }
     }
 

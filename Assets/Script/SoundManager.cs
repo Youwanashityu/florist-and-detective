@@ -121,8 +121,12 @@ public class SoundManager : MonoBehaviour
 
         bgmSource.clip = clip;
         bgmSource.volume = Mathf.Clamp01(volume);
+        bgmSource.loop = true; // ループ追加
         bgmSource.Play();
     }
+
+
+
 
     /// <summary>BGM を停止します。</summary>
     public void StopBGM() => bgmSource.Stop();

@@ -24,24 +24,29 @@ public class NovelDebugger : MonoBehaviour
     // ライフサイクル
     // -------------------------------------------------------
 
+    private void Awake()
+    {
+        if (!enableDebug) return;
+        NovelManager.Instance.skipAutoStart = true;
+    }
+
     private IEnumerator Start()
     {
         if (!enableDebug) yield break;
 
-        NovelManager.Instance.skipAutoStart = true;
-
-        yield return null;
-        yield return null;
-
-        // BGM再生
         if (!string.IsNullOrEmpty(debugBGMName))
         {
             var clip = Resources.Load<AudioClip>($"BGM/{debugBGMName}");
             if (clip != null)
                 SoundManager.Instance?.PlayBGM(clip);
-            else
-                Debug.LogWarning($"[NovelDebugger] BGM '{debugBGMName}' が見つかりません。");
         }
+
+        yield return ScenarioLoader.LoadAsync(data =>
+        {
+            NovelManager.Instance.SetScenarioData(data);
+        });
+
+        yield return null;
 
         Debug.Log($"[NovelDebugger] ID:{debugStartId} からジャンプ");
         NovelManager.Instance?.GoToLine(debugStartId);

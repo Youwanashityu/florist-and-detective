@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,14 @@ public class NovelManager : MonoBehaviour
 
     [Header("最初のシナリオID")]
     [SerializeField] private int startId = 1;
+    /// <summary>
+    /// 外部からシナリオデータをセットします。
+    /// </summary>
+    public void SetScenarioData(ScenarioData data)
+    {
+        scenarioData = data;
+    }
+
 
     // -------------------------------------------------------
     // 内部状態
@@ -56,18 +65,31 @@ public class NovelManager : MonoBehaviour
 
     private void Start()
     {
-        scenarioData = ScenarioLoader.Load();
-        if (scenarioData == null) return;
-
         if (skipAutoStart) return;
+        StartCoroutine(LoadAndStart());
+    }
+
+    private IEnumerator LoadAndStart()
+    {
+        yield return ScenarioLoader.LoadAsync(data =>
+        {
+            scenarioData = data;
+            if (scenarioData == null)
+            {
+                Debug.LogWarning("[NovelManager] シナリオの読み込みに失敗しました。");
+                return;
+            }
+        });
+
+        if (scenarioData == null) yield break;
 
         // JumpToIdが指定されていればそこから開始
         if (NovelProgressData.JumpToId > 0)
         {
             int jumpId = NovelProgressData.JumpToId;
-            NovelProgressData.JumpToId = 0; // リセット
+            NovelProgressData.JumpToId = 0;
             GoToLine(jumpId);
-            return;
+            yield break;
         }
 
         GoToLine(startId);
@@ -205,7 +227,7 @@ public class NovelManager : MonoBehaviour
     /// </summary>
     private void PlayBGM(string bgmName)
     {
-        var clip = Resources.Load<UnityEngine.AudioClip>($"BGM/{bgmName}");
+        var clip = Resources.Load<AudioClip>($"BGM/{bgmName}");
         if (clip == null)
         {
             Debug.LogWarning($"[NovelManager] BGM '{bgmName}' が見つかりません。");
